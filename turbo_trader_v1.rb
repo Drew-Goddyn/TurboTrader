@@ -6,18 +6,12 @@ require 'action_view/helpers'
 require "alphavantagerb"
 
 Alpaca::Trade::Api.configure do |config|
-  # config.endpoint = 'https://paper-api.alpaca.markets'
+  config.endpoint = 'https://paper-api.alpaca.markets'
   config.key_id = ''
   config.key_secret = 's'
 end
 
-# Kucoin.configure do |config|
-#   config.key          =   "5f35b7445b13f0000649853b"
-#   config.secret       =   "1cca491c-675e-47a4-8d88-32c08087875d"
-#   config.passphrase   =   "kryptonite"
-# end
-
-class Trader
+class TurboTraderV1
   include ActionView::Helpers::DateHelper
 
   attr_reader :position, :symbol, :percentage_diff, :current_price, :total_profit
@@ -205,9 +199,8 @@ class Trader
 end
 
 
-$details
 
-Trader.new($ARGV[0]).trade
+TurboTraderV1.new($ARGV[0]).trade
 
 # threads = [:AAPL, :MSFT, :TSLA, :GOOGL, :AMZN].map do |symbol|
 #     Thread.new { Trader.new(symbol: symbol).trade }
